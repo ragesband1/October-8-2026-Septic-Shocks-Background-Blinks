@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Background Image Animation with Neon Borders - SEPTIC SHOCKS FAST GLOW</title>
+<style>
+body{
+margin:0;padding:0;height:100vh;width:100vw;overflow:hidden;
+background-color:black;position:relative;
+}
+.background{
+position:absolute;top:0;left:0;width:100%;height:100%;
+background-image:url('1.jpg');
+background-size:cover;background-position:center;background-repeat:no-repeat;
+transition:opacity 0.4s ease;opacity:1;z-index:1;
+filter:contrast(1.2) saturate(1.4) brightness(1.1);
+}
+.gradient-overlay{
+position:absolute;top:0;left:0;width:100%;height:100%;
+background:rgba(255,0,255,0.4);
+animation:bodyGradient 2.5s infinite linear, septicFlash 0.2s infinite;
+z-index:2;
+}
+.border{
+position:absolute;top:0;left:0;width:100%;height:100%;
+box-sizing:border-box;
+border:12px solid transparent;
+border-image-slice:1;
+border-image-source:linear-gradient(45deg,magenta,deeppink,red,purple);
+border-image-repeat:stretch;
+margin:0;
+animation:borderPulse 0.7s infinite ease-in-out, septicShock 0.12s infinite;
+z-index:3;
+box-shadow:inset 0 0 40px #ff00ff,0 0 40px #ffff00;
+}
+
+/* SEPTIC SHOCKS - KIDLAT EFFECT */
+@keyframes septicShock{
+0%{transform:translate(0,0) skew(0deg);filter:hue-rotate(0deg) brightness(1) contrast(1)}
+15%{transform:translate(-3px,2px) skew(1.5deg);filter:hue-rotate(30deg) brightness(1.6) contrast(1.5)}
+30%{transform:translate(3px,-2px) skew(-1.5deg);filter:hue-rotate(-30deg) brightness(0.7) contrast(2)}
+45%{transform:translate(-2px,0px) scale(1.01);filter:brightness(1.8) saturate(2)}
+60%{transform:translate(2px,1px);filter:hue-rotate(15deg) brightness(1.3)}
+100%{transform:translate(0,0) skew(0deg);filter:hue-rotate(0deg) brightness(1)}
+}
+@keyframes septicFlash{
+0%,90%,100%{opacity:1}
+95%{opacity:0.8;filter:brightness(2)}
+}
+
+/* FAST NEON - HINDI MABAGAL - 2.5s LANG DATI 10s */
+@keyframes bodyGradient{
+0%{background:rgba(255,0,255,0.45);filter:hue-rotate(0deg)}
+25%{background:rgba(255,255,0,0.45);filter:hue-rotate(90deg)}
+50%{background:rgba(0,255,255,0.45);filter:hue-rotate(180deg)}
+75%{background:rgba(0,255,127,0.45);filter:hue-rotate(270deg)}
+100%{background:rgba(255,0,255,0.45);filter:hue-rotate(360deg)}
+}
+@keyframes borderPulse{
+0%{border-color:rgba(255,0,255,1);box-shadow:inset 0 0 30px #ff00ff,0 0 30px #ff00ff,0 0 60px #ff00ff}
+33%{border-color:rgba(255,255,0,1);box-shadow:inset 0 0 40px #ffff00,0 0 40px #ffff00,0 0 80px #ffff00}
+66%{border-color:rgba(0,255,255,1);box-shadow:inset 0 0 40px #00ffff,0 0 40px #00ffff,0 0 80px #00ffff}
+100%{border-color:rgba(255,0,255,1);box-shadow:inset 0 0 30px #ff00ff,0 0 30px #ff00ff,0 0 60px #ff00ff}
+}
+</style>
+</head>
+<body>
+<div class="background"></div>
+<div class="gradient-overlay"></div>
+<div class="border"></div>
+
+<script>
+const background = document.querySelector('.background');
+const totalImages = 13;
+let index = 1;
+function changeImages(){
+setInterval(()=>{
+background.style.transition='opacity 0.4s ease';
+background.style.opacity=0;
+setTimeout(()=>{
+background.style.backgroundImage=`url('${index}.jpg')`;
+background.style.opacity=1;
+// SHOCK FLASH EVERY IMAGE CHANGE
+document.body.style.filter='brightness(1.8) contrast(1.5)';
+setTimeout(()=>{document.body.style.filter='brightness(1) contrast(1)'},120);
+index = (index % totalImages) + 1;
+},400);
+},2000);
+}
+changeImages();
+</script>
+</body>
+</html>
